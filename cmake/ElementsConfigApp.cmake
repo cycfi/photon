@@ -87,12 +87,18 @@ if (NOT DEFINED ELEMENTS_APP_SOURCES)
 endif()
 
 if (APPLE)
+   set(MACOSX_BUNDLE_ICON_FILE cycfi.icns)
+   set(ELEMENTS_APP_ICON "${ELEMENTS_ROOT}/resources/macos/cycfi.icns")
+   set_source_files_properties(${ELEMENTS_APP_ICON} PROPERTIES
+      MACOSX_PACKAGE_LOCATION "Resources"
+   )
    add_executable(
       ${ELEMENTS_APP_PROJECT}
       MACOSX_BUNDLE
       ${ELEMENTS_APP_SOURCES}
       ${ELEMENTS_RESOURCES}
       ${ELEMENTS_APP_RESOURCES}
+      ${ELEMENTS_APP_ICON}
    )
 elseif (UNIX AND NOT APPLE)
    add_executable(
@@ -108,6 +114,7 @@ elseif (WIN32)
       ${ELEMENTS_APP_SOURCES}
       ${ELEMENTS_RESOURCES}
       ${ELEMENTS_APP_RESOURCES}
+      "${ELEMENTS_ROOT}/resources/windows/cycfi.rc"
    )
 
    if (MSVC)
